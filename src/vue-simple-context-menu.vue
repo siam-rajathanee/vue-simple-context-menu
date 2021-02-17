@@ -5,13 +5,11 @@
       'vue-simple-context-menu',
       `vue-simple-context-menu--${menuPosition}`,
     ]"
+    v-click-outside="onClickOutside"
   >
     <slot name="header" />
     <slot>
-      <ul
-        class="vue-simple-context-menu__list"
-        v-click-outside="onClickOutside"
-      >
+      <ul class="vue-simple-context-menu__list">
         <li
           v-for="(option, index) in options"
           :key="index"
@@ -22,7 +20,7 @@
             option.type === 'divider' ? 'vue-simple-context-menu__divider' : '',
           ]"
         >
-          <span v-html="option.name"></span>
+          <span v-html="option.name" />
         </li>
       </ul>
     </slot>
@@ -42,7 +40,6 @@ export default {
     elementId: {
       type: String,
       required: true,
-      default: () => `context_menu-${+new Date()}`,
     },
     options: {
       type: Array,
@@ -67,7 +64,7 @@ export default {
     showMenu(event, item) {
       this.item = item;
 
-      var menu = document.getElementById(this.elementId);
+      const menu = document.getElementById(this.elementId);
       if (!menu) {
         return;
       }
@@ -95,7 +92,7 @@ export default {
       menu.classList.add("vue-simple-context-menu--active");
     },
     hideContextMenu() {
-      let element = document.getElementById(this.elementId);
+      const element = document.getElementById(this.elementId);
       if (element) {
         element.classList.remove("vue-simple-context-menu--active");
       }

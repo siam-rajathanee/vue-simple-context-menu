@@ -11,7 +11,6 @@ var script = {
     elementId: {
       type: String,
       required: true,
-      default: function () { return ("context_menu-" + (+new Date())); },
     },
     options: {
       type: Array,
@@ -178,6 +177,14 @@ var __vue_render__ = function() {
   return _c(
     "div",
     {
+      directives: [
+        {
+          name: "click-outside",
+          rawName: "v-click-outside",
+          value: _vm.onClickOutside,
+          expression: "onClickOutside"
+        }
+      ],
       class: [
         "vue-simple-context-menu",
         "vue-simple-context-menu--" + _vm.menuPosition
@@ -190,17 +197,7 @@ var __vue_render__ = function() {
       _vm._t("default", [
         _c(
           "ul",
-          {
-            directives: [
-              {
-                name: "click-outside",
-                rawName: "v-click-outside",
-                value: _vm.onClickOutside,
-                expression: "onClickOutside"
-              }
-            ],
-            staticClass: "vue-simple-context-menu__list"
-          },
+          { staticClass: "vue-simple-context-menu__list" },
           _vm._l(_vm.options, function(option, index) {
             return _c(
               "li",
