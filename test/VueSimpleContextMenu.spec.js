@@ -114,4 +114,43 @@ describe('VueSimpleContextMenu.vue', () => {
     // Check the event was emitted properly
     expect(wrapper.emitted('option-clicked')).toBeTruthy()
   })
+
+  it('Show header correctly', async () => {
+    const wrapper = shallowMount(VueSimpleContextMenu, {
+      slots: {
+        header: `<header class="header">Header</header>`
+      }
+    })
+
+    const header = wrapper.find('header.header')
+    expect(header.text()).toBe('Header')
+  })
+
+  it('Show footer correctly', async () => {
+    const wrapper = shallowMount(VueSimpleContextMenu, {
+      slots: {
+        footer: `<footer class="footer">Footer</footer>`
+      }
+    })
+
+    const footer = wrapper.find('footer.footer')
+    expect(footer.text()).toBe('Footer')
+  })
+
+  it('Should overwrite menu', async () => {
+    const wrapper = shallowMount(VueSimpleContextMenu, {
+      slots: {
+        default: `
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+          </ul>
+        `
+      }
+    })
+
+    const menu = wrapper.find('ul')
+    expect(menu.findAll('li').length).toBe(3)
+  })
 })

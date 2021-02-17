@@ -11,31 +11,33 @@
   Vue.use(vClickOutside);
 
   var script = {
-    name: 'VueSimpleContextMenu',
+    name: "VueSimpleContextMenu",
     props: {
       elementId: {
         type: String,
-        required: true
+        required: false,
+        default: function () { return ("context_menu-" + (+new Date())); },
       },
       options: {
         type: Array,
-        required: true
-      }
+        required: false,
+        default: function () { return []; },
+      },
     },
-    data: function data () {
+    data: function data() {
       return {
         item: null,
         menuWidth: null,
-        menuHeight: null
-      }
+        menuHeight: null,
+      };
     },
     methods: {
-      showMenu: function showMenu (event, item) {
+      showMenu: function showMenu(event, item) {
         this.item = item;
 
         var menu = document.getElementById(this.elementId);
         if (!menu) {
-          return
+          return;
         }
 
         if (!this.menuWidth || !this.menuHeight) {
@@ -46,48 +48,48 @@
           menu.removeAttribute("style");
         }
 
-        if ((this.menuWidth + event.pageX) >= window.innerWidth) {
+        if (this.menuWidth + event.pageX >= window.innerWidth) {
           menu.style.left = (event.pageX - this.menuWidth + 2) + "px";
         } else {
           menu.style.left = (event.pageX - 2) + "px";
         }
 
-        if ((this.menuHeight + event.pageY) >= window.innerHeight) {
+        if (this.menuHeight + event.pageY >= window.innerHeight) {
           menu.style.top = (event.pageY - this.menuHeight + 2) + "px";
         } else {
           menu.style.top = (event.pageY - 2) + "px";
         }
 
-        menu.classList.add('vue-simple-context-menu--active');
+        menu.classList.add("vue-simple-context-menu--active");
       },
-      hideContextMenu: function hideContextMenu () {
+      hideContextMenu: function hideContextMenu() {
         var element = document.getElementById(this.elementId);
         if (element) {
-          element.classList.remove('vue-simple-context-menu--active');
+          element.classList.remove("vue-simple-context-menu--active");
         }
       },
-      onClickOutside: function onClickOutside () {
+      onClickOutside: function onClickOutside() {
         this.hideContextMenu();
       },
-      optionClicked: function optionClicked (option) {
+      optionClicked: function optionClicked(option) {
         this.hideContextMenu();
-        this.$emit('option-clicked', {
+        this.$emit("option-clicked", {
           item: this.item,
-          option: option
+          option: option,
         });
       },
-      onEscKeyRelease: function onEscKeyRelease (event) {
+      onEscKeyRelease: function onEscKeyRelease(event) {
         if (event.keyCode === 27) {
           this.hideContextMenu();
         }
-      }
+      },
     },
-    mounted: function mounted () {
-      document.body.addEventListener('keyup', this.onEscKeyRelease);
+    mounted: function mounted() {
+      document.body.addEventListener("keyup", this.onEscKeyRelease);
     },
-    beforeDestroy: function beforeDestroy () {
-      document.removeEventListener('keyup', this.onEscKeyRelease);
-    }
+    beforeDestroy: function beforeDestroy() {
+      document.removeEventListener("keyup", this.onEscKeyRelease);
+    },
   };
 
   function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
@@ -172,46 +174,56 @@
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("div", [
-      _c(
-        "ul",
-        {
-          directives: [
+    return _c(
+      "div",
+      { attrs: { id: _vm.elementId } },
+      [
+        _vm._t("header"),
+        _vm._v(" "),
+        _vm._t("default", [
+          _c(
+            "ul",
             {
-              name: "click-outside",
-              rawName: "v-click-outside",
-              value: _vm.onClickOutside,
-              expression: "onClickOutside"
-            }
-          ],
-          staticClass: "vue-simple-context-menu",
-          attrs: { id: _vm.elementId }
-        },
-        _vm._l(_vm.options, function(option, index) {
-          return _c(
-            "li",
-            {
-              key: index,
-              staticClass: "vue-simple-context-menu__item",
-              class: [
-                option.class,
-                option.type === "divider"
-                  ? "vue-simple-context-menu__divider"
-                  : ""
-              ],
-              on: {
-                click: function($event) {
-                  $event.stopPropagation();
-                  return _vm.optionClicked(option)
+              directives: [
+                {
+                  name: "click-outside",
+                  rawName: "v-click-outside",
+                  value: _vm.onClickOutside,
+                  expression: "onClickOutside"
                 }
-              }
+              ],
+              staticClass: "vue-simple-context-menu"
             },
-            [_c("span", { domProps: { innerHTML: _vm._s(option.name) } })]
+            _vm._l(_vm.options, function(option, index) {
+              return _c(
+                "li",
+                {
+                  key: index,
+                  staticClass: "vue-simple-context-menu__item",
+                  class: [
+                    option.class,
+                    option.type === "divider"
+                      ? "vue-simple-context-menu__divider"
+                      : ""
+                  ],
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation();
+                      return _vm.optionClicked(option)
+                    }
+                  }
+                },
+                [_c("span", { domProps: { innerHTML: _vm._s(option.name) } })]
+              )
+            }),
+            0
           )
-        }),
-        0
-      )
-    ])
+        ]),
+        _vm._v(" "),
+        _vm._t("footer")
+      ],
+      2
+    )
   };
   var __vue_staticRenderFns__ = [];
   __vue_render__._withStripped = true;
