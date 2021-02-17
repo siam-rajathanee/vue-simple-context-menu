@@ -1,8 +1,11 @@
 <template>
-  <div :id="elementId">
+  <div :id="elementId" class="vue-simple-context-menu">
     <slot name="header" />
     <slot>
-      <ul class="vue-simple-context-menu" v-click-outside="onClickOutside">
+      <ul
+        class="vue-simple-context-menu__list"
+        v-click-outside="onClickOutside"
+      >
         <li
           v-for="(option, index) in options"
           :key="index"
@@ -122,7 +125,6 @@ $black: #333;
   margin: 0;
   padding: 0;
   display: none;
-  list-style: none;
   position: absolute;
   z-index: 1000000;
   background-color: $light-grey;
@@ -135,6 +137,10 @@ $black: #333;
 
   &--active {
     display: block;
+  }
+
+  &__list {
+    list-style: none;
   }
 
   &__item {

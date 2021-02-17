@@ -170,7 +170,7 @@ var __vue_render__ = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
-    { attrs: { id: _vm.elementId } },
+    { staticClass: "vue-simple-context-menu", attrs: { id: _vm.elementId } },
     [
       _vm._t("header"),
       _vm._v(" "),
@@ -186,7 +186,7 @@ var __vue_render__ = function() {
                 expression: "onClickOutside"
               }
             ],
-            staticClass: "vue-simple-context-menu"
+            staticClass: "vue-simple-context-menu__list"
           },
           _vm._l(_vm.options, function(option, index) {
             return _c(
