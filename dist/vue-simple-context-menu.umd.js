@@ -24,6 +24,12 @@
         required: false,
         default: function () { return []; },
       },
+      menuPosition: {
+        type: String,
+        required: false,
+        default: "absolute",
+        validator: function (value) { return ["absolute", "fixed"].includes(value); },
+      },
     },
     data: function data() {
       return {
@@ -177,7 +183,13 @@
     var _c = _vm._self._c || _h;
     return _c(
       "div",
-      { staticClass: "vue-simple-context-menu", attrs: { id: _vm.elementId } },
+      {
+        class: [
+          "vue-simple-context-menu",
+          "vue-simple-context-menu--" + _vm.menuPosition
+        ],
+        attrs: { id: _vm.elementId }
+      },
       [
         _vm._t("header"),
         _vm._v(" "),

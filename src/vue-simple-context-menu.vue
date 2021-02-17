@@ -1,5 +1,11 @@
 <template>
-  <div :id="elementId" class="vue-simple-context-menu">
+  <div
+    :id="elementId"
+    :class="[
+      'vue-simple-context-menu',
+      `vue-simple-context-menu--${menuPosition}`,
+    ]"
+  >
     <slot name="header" />
     <slot>
       <ul
@@ -42,6 +48,12 @@ export default {
       type: Array,
       required: false,
       default: () => [],
+    },
+    menuPosition: {
+      type: String,
+      required: false,
+      default: "absolute",
+      validator: (value) => ["absolute", "fixed"].includes(value),
     },
   },
   data() {
@@ -126,7 +138,6 @@ $black: #333;
   margin: 0;
   padding: 0;
   display: none;
-  position: fixed;
   z-index: 1000000;
   background-color: $light-grey;
   border-bottom-width: 0px;
@@ -135,6 +146,14 @@ $black: #333;
     sans-serif;
   box-shadow: 0 3px 6px 0 rgba($black, 0.2);
   border-radius: 4px;
+
+  &--absolute {
+    position: absolute;
+  }
+
+  &--fixed {
+    position: fixed;
+  }
 
   &--active {
     display: block;

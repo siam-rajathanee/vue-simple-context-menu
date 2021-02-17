@@ -30,6 +30,7 @@ describe('VueSimpleContextMenu.vue', () => {
 
     expect(wrapper.vm.elementId).toBe(initialPropsData.elementId)
     expect(wrapper.vm.options).toBe(initialPropsData.options)
+    expect(wrapper.find('.vue-simple-context-menu--absolute').exists()).toBeTruthy()
   })
 
   it('Shows menu on click', async () => {
