@@ -25,16 +25,17 @@
 </template>
 
 <script>
-import Vue from "vue";
 import vClickOutside from "v-click-outside";
-Vue.use(vClickOutside);
 
 export default {
   name: "VueSimpleContextMenu",
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
   props: {
     elementId: {
       type: String,
-      required: false,
+      required: true,
       default: () => `context_menu-${+new Date()}`,
     },
     options: {
@@ -125,7 +126,7 @@ $black: #333;
   margin: 0;
   padding: 0;
   display: none;
-  position: absolute;
+  position: fixed;
   z-index: 1000000;
   background-color: $light-grey;
   border-bottom-width: 0px;

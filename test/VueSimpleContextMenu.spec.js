@@ -117,6 +117,9 @@ describe('VueSimpleContextMenu.vue', () => {
 
   it('Show header correctly', async () => {
     const wrapper = shallowMount(VueSimpleContextMenu, {
+      props: {
+        elementId: 'context-menu'
+      },
       slots: {
         header: `<header class="header">Header</header>`
       }
@@ -128,6 +131,9 @@ describe('VueSimpleContextMenu.vue', () => {
 
   it('Show footer correctly', async () => {
     const wrapper = shallowMount(VueSimpleContextMenu, {
+      props: {
+        elementId: 'context-menu'
+      },
       slots: {
         footer: `<footer class="footer">Footer</footer>`
       }
@@ -139,6 +145,9 @@ describe('VueSimpleContextMenu.vue', () => {
 
   it('Should overwrite menu', async () => {
     const wrapper = shallowMount(VueSimpleContextMenu, {
+      props: {
+        elementId: 'context-menu'
+      },
       slots: {
         default: `
           <ul>

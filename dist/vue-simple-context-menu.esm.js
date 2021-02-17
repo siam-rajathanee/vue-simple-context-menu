@@ -1,15 +1,16 @@
-import Vue from 'vue';
 import vClickOutside from 'v-click-outside';
 
 //
-Vue.use(vClickOutside);
 
 var script = {
   name: "VueSimpleContextMenu",
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
   props: {
     elementId: {
       type: String,
-      required: false,
+      required: true,
       default: function () { return ("context_menu-" + (+new Date())); },
     },
     options: {

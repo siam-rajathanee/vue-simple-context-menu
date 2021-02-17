@@ -1,21 +1,22 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue'), require('v-click-outside')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'vue', 'v-click-outside'], factory) :
-  (global = global || self, factory(global.VueSimpleContextMenu = {}, global.Vue, global.vClickOutside));
-}(this, (function (exports, Vue, vClickOutside) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('v-click-outside')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'v-click-outside'], factory) :
+  (global = global || self, factory(global.VueSimpleContextMenu = {}, global.vClickOutside));
+}(this, (function (exports, vClickOutside) { 'use strict';
 
-  Vue = Vue && Object.prototype.hasOwnProperty.call(Vue, 'default') ? Vue['default'] : Vue;
   vClickOutside = vClickOutside && Object.prototype.hasOwnProperty.call(vClickOutside, 'default') ? vClickOutside['default'] : vClickOutside;
 
   //
-  Vue.use(vClickOutside);
 
   var script = {
     name: "VueSimpleContextMenu",
+    directives: {
+      clickOutside: vClickOutside.directive,
+    },
     props: {
       elementId: {
         type: String,
-        required: false,
+        required: true,
         default: function () { return ("context_menu-" + (+new Date())); },
       },
       options: {
